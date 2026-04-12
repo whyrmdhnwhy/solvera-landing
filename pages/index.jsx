@@ -129,6 +129,9 @@ export default function SolveraLanding() {
   const [typingText, setTypingText] = useState("");
   const [tIdx, setTIdx] = useState(0);
   const [mob, setMob] = useState(false);
+  const [unlockedTiers, setUnlockedTiers] = useState({ breakdown: false, trace: false, report: false });
+  const [paymentState, setPaymentState] = useState("");
+  const [loadingTier, setLoadingTier] = useState(null);
   const demoRef = useRef(null);
 
   useEffect(() => { const c = () => setMob(window.innerWidth < 768); c(); window.addEventListener("resize", c); return () => window.removeEventListener("resize", c); }, []);
@@ -146,10 +149,26 @@ export default function SolveraLanding() {
 
   const handleCheck = () => {
     setLoading(true); setResult(null);
+    setUnlockedTiers({ breakdown: false, trace: false, report: false });
+    setPaymentState(""); setLoadingTier(null);
     setTimeout(() => {
       const w = SAMPLE_WALLETS.find(w => input.includes(w.address.slice(0, 4))) || SAMPLE_WALLETS[Math.floor(Math.random() * SAMPLE_WALLETS.length)];
       setResult(w); setLoading(false);
     }, 1800);
+  };
+
+  const unlockTier = async (tier) => {
+    if (loadingTier) return;
+    setLoadingTier(tier);
+    setPaymentState("Waiting for wallet approval...");
+    await new Promise(r => setTimeout(r, 800));
+    setPaymentState("Payment received. Verifying...");
+    await new Promise(r => setTimeout(r, 1000));
+    setPaymentState("Verified. Unlocking content...");
+    await new Promise(r => setTimeout(r, 500));
+    setUnlockedTiers(prev => ({ ...prev, [tier]: true }));
+    setLoadingTier(null);
+    setPaymentState("");
   };
 
   const g = { background: "linear-gradient(135deg, #67e8f9, #818cf8, #c084fc)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" };
@@ -208,7 +227,7 @@ export default function SolveraLanding() {
 
         <div style={{ display: "flex", gap: 12, justifyContent: "center", flexWrap: "wrap", marginTop: 28, flexDirection: mob ? "column" : "row", padding: mob ? "0 20px" : 0 }} className="fu3">
           <button style={{ ...btnP, width: mob ? "100%" : "auto" }} onClick={() => demoRef.current?.scrollIntoView({ behavior: "smooth" })}>
-            Check a Wallet (Free)
+            Scan Free Score
           </button>
           <a href="https://t.me/SolveraBot" target="_blank" rel="noopener noreferrer" style={{ ...btnS, width: mob ? "100%" : "auto", textDecoration: "none", display: "inline-flex", alignItems: "center", justifyContent: "center", gap: 8 }}>
             <svg width="16" height="16" viewBox="0 0 24 24" fill="#94a3b8"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221l-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.446 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.334-.373-.121l-6.869 4.326-2.96-.924c-.643-.203-.657-.643.136-.953l11.566-4.458c.537-.194 1.006.131.832.94z"/></svg>
@@ -245,7 +264,7 @@ export default function SolveraLanding() {
         <div style={{ display: "flex", gap: 10, flexDirection: mob ? "column" : "row" }}>
           <input type="text" placeholder="Paste any Solana wallet address..." value={input} onChange={e => setInput(e.target.value)} onKeyDown={e => e.key === "Enter" && input && handleCheck()} style={{ ...inp, width: mob ? "100%" : "auto" }} />
           <button onClick={handleCheck} disabled={!input || loading} style={{ ...btnP, padding: "14px 24px", fontSize: 14, whiteSpace: "nowrap", width: mob ? "100%" : "auto", opacity: !input || loading ? 0.5 : 1 }}>
-            {loading ? "Analyzing..." : "Check Wallet"}
+            {loading ? "Analyzing..." : "Scan Free Score"}
           </button>
         </div>
         <p style={{ fontSize: 11, color: "#475569", marginTop: 8, textAlign: "center" }}>Demo mode: uses sample data. Connect to live API for real analysis.</p>
@@ -268,7 +287,92 @@ export default function SolveraLanding() {
               })}
             </div>
             <p style={{ fontSize: 13, color: "#94a3b8", lineHeight: 1.7, marginTop: 20, padding: 16, borderRadius: 10, background: "rgba(255,255,255,0.02)", border: "1px solid rgba(255,255,255,0.04)" }}>{result.summary}</p>
-            <TypologyBreakdown breakdown={result.breakdown} />
+            {/* Tier cards — appear below free score */}
+            <div style={{ display: "flex", flexDirection: "column", gap: 12, marginTop: 4 }}>
+
+              {/* Tier 2: Risk Breakdown */}
+              {!unlockedTiers.breakdown ? (
+                <div style={{ padding: "16px 20px", background: "rgba(255,255,255,0.02)", border: "1px solid rgba(255,255,255,0.06)", borderRadius: 12, textAlign: "center" }}>
+                  <p style={{ fontSize: 13, color: "#94a3b8", marginBottom: 12 }}>
+                    Want to know why this wallet scored {result.score}?
+                  </p>
+                  <button onClick={() => unlockTier("breakdown")} disabled={!!loadingTier}
+                    style={{ ...btnP, padding: "10px 24px", fontSize: 13, opacity: loadingTier === "breakdown" ? 0.7 : 1 }}>
+                    {loadingTier === "breakdown" ? (paymentState || "Unlocking...") : "Unlock Breakdown — $0.02"}
+                  </button>
+                </div>
+              ) : (
+                <TypologyBreakdown breakdown={result.breakdown} />
+              )}
+
+              {/* Tier 3: Full Trace */}
+              {!unlockedTiers.trace ? (
+                <div style={{ position: "relative", overflow: "hidden", background: "rgba(255,255,255,0.02)", border: "1px solid rgba(255,255,255,0.06)", borderRadius: 16, padding: mob ? 20 : 24 }}>
+                  <div style={{ filter: "blur(5px)", opacity: 0.35, pointerEvents: "none", userSelect: "none" }}>
+                    <div style={{ fontSize: 13, fontWeight: 600, color: "#94a3b8", marginBottom: 10 }}>Full Trace</div>
+                    {[80, 65, 90, 55].map((w, i) => (
+                      <div key={i} style={{ height: 10, width: `${w}%`, background: "rgba(255,255,255,0.06)", borderRadius: 4, marginBottom: 8 }} />
+                    ))}
+                  </div>
+                  <div style={{ position: "absolute", inset: 0, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", background: "rgba(10,14,26,0.65)", backdropFilter: "blur(2px)", borderRadius: 16, padding: 20 }}>
+                    <span style={{ fontSize: 11, fontWeight: 600, color: "#94a3b8", background: "rgba(255,255,255,0.06)", padding: "4px 12px", borderRadius: 20, marginBottom: 12 }}>Locked · $0.08</span>
+                    <h3 style={{ fontSize: 15, fontWeight: 600, color: "#e2e8f0", marginBottom: 8 }}>Full Trace</h3>
+                    <p style={{ fontSize: 12, color: "#94a3b8", textAlign: "center", maxWidth: 260, lineHeight: 1.5, marginBottom: 14 }}>
+                      Transaction patterns, protocol exposure, counterparty analysis, and complete risk context.
+                    </p>
+                    <button onClick={() => unlockTier("trace")} disabled={!!loadingTier}
+                      style={{ ...btnP, padding: "10px 22px", fontSize: 13, opacity: loadingTier === "trace" ? 0.7 : 1 }}>
+                      {loadingTier === "trace" ? (paymentState || "Unlocking...") : "Unlock Full Trace — $0.08"}
+                    </button>
+                  </div>
+                </div>
+              ) : (
+                <div style={{ background: "rgba(255,255,255,0.02)", border: "1px solid rgba(255,255,255,0.06)", borderRadius: 16, padding: mob ? 20 : 24 }}>
+                  <div style={{ fontSize: 11, fontWeight: 600, color: "#818cf8", letterSpacing: "0.06em", marginBottom: 14 }}>FULL TRACE</div>
+                  <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: 8, marginBottom: 14 }}>
+                    {[{ label: "Transactions", value: "184" }, { label: "Protocols", value: "7" }, { label: "Counterparties", value: "42" }, { label: "Risk Events", value: result.breakdown.filter(b => b.status !== "NONE").length }].map(s => (
+                      <div key={s.label} style={{ padding: "10px 12px", background: "rgba(255,255,255,0.02)", borderRadius: 8, textAlign: "center" }}>
+                        <div style={{ fontSize: 11, color: "#64748b", marginBottom: 4 }}>{s.label}</div>
+                        <div style={{ fontSize: 16, fontWeight: 700, color: "#e2e8f0" }}>{s.value}</div>
+                      </div>
+                    ))}
+                  </div>
+                  <p style={{ fontSize: 12, color: "#94a3b8", lineHeight: 1.6 }}>{result.summary}</p>
+                </div>
+              )}
+
+              {/* Tier 4: Compliance Report */}
+              {!unlockedTiers.report ? (
+                <div style={{ position: "relative", overflow: "hidden", background: "rgba(255,255,255,0.02)", border: "1px solid rgba(255,255,255,0.06)", borderRadius: 16, padding: mob ? 20 : 24 }}>
+                  <div style={{ filter: "blur(5px)", opacity: 0.35, pointerEvents: "none", userSelect: "none" }}>
+                    <div style={{ fontSize: 13, fontWeight: 600, color: "#94a3b8", marginBottom: 10 }}>Compliance Report</div>
+                    {[85, 70, 75].map((w, i) => (
+                      <div key={i} style={{ height: 10, width: `${w}%`, background: "rgba(255,255,255,0.06)", borderRadius: 4, marginBottom: 8 }} />
+                    ))}
+                  </div>
+                  <div style={{ position: "absolute", inset: 0, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", background: "rgba(10,14,26,0.65)", backdropFilter: "blur(2px)", borderRadius: 16, padding: 20 }}>
+                    <span style={{ fontSize: 11, fontWeight: 600, color: "#94a3b8", background: "rgba(255,255,255,0.06)", padding: "4px 12px", borderRadius: 20, marginBottom: 12 }}>Locked · $2.00</span>
+                    <h3 style={{ fontSize: 15, fontWeight: 600, color: "#e2e8f0", marginBottom: 8 }}>Compliance Report</h3>
+                    <p style={{ fontSize: 12, color: "#94a3b8", textAlign: "center", maxWidth: 260, lineHeight: 1.5, marginBottom: 14 }}>
+                      STR-ready PDF with FATF predicate crime mapping, 5W+2H framework, and recommended actions.
+                    </p>
+                    <button onClick={() => unlockTier("report")} disabled={!!loadingTier}
+                      style={{ ...btnP, padding: "10px 22px", fontSize: 13, opacity: loadingTier === "report" ? 0.7 : 1 }}>
+                      {loadingTier === "report" ? (paymentState || "Unlocking...") : "Generate Report — $2.00"}
+                    </button>
+                  </div>
+                </div>
+              ) : (
+                <div style={{ background: "rgba(255,255,255,0.02)", border: "1px solid rgba(255,255,255,0.06)", borderRadius: 16, padding: mob ? 20 : 24, textAlign: "center" }}>
+                  <div style={{ fontSize: 11, fontWeight: 600, color: "#22c55e", letterSpacing: "0.06em", marginBottom: 12 }}>REPORT GENERATED</div>
+                  <p style={{ fontSize: 13, color: "#94a3b8", marginBottom: 16 }}>Your STR-ready PDF compliance report is ready.</p>
+                  <span style={{ ...btnP, padding: "12px 28px", fontSize: 14, display: "inline-flex", alignItems: "center", gap: 8, opacity: 0.6 }}>
+                    Download PDF (Live API Only)
+                  </span>
+                </div>
+              )}
+
+            </div>
           </div>
         )}
       </section>
