@@ -285,14 +285,25 @@ export default function SolveraLanding() {
 
               {/* Tier 2: Risk Breakdown */}
               {!unlockedTiers.breakdown ? (
-                <div style={{ padding: "16px 20px", background: "rgba(255,255,255,0.02)", border: "1px solid rgba(255,255,255,0.06)", borderRadius: 12, textAlign: "center" }}>
-                  <p style={{ fontSize: 13, color: "#94a3b8", marginBottom: 12 }}>
-                    Want to know why this wallet scored {result.score}?
-                  </p>
-                  <button onClick={() => unlockTier("breakdown")} disabled={!!loadingTier}
-                    style={{ ...btnP, padding: "10px 24px", fontSize: 13, opacity: loadingTier === "breakdown" ? 0.7 : 1 }}>
-                    {loadingTier === "breakdown" ? (paymentState || "Unlocking...") : "Unlock Breakdown — $0.02"}
-                  </button>
+                <div style={{ position: "relative", overflow: "hidden", minHeight: 240, background: "rgba(255,255,255,0.02)", border: "1px solid rgba(255,255,255,0.08)", borderRadius: 16 }}>
+                  {/* Layer 1: blurred placeholder bars */}
+                  <div style={{ padding: 28, filter: "blur(6px)", opacity: 0.3, pointerEvents: "none", userSelect: "none" }}>
+                    {[[60, 16], [90, 10], [75, 10], [85, 10], [50, 10], [80, 10], [65, 10]].map(([w, h], i) => (
+                      <div key={i} style={{ height: h, width: `${w}%`, background: `rgba(255,255,255,${i === 0 ? 0.08 : 0.05})`, borderRadius: 4, marginBottom: i === 0 ? 16 : 8 }} />
+                    ))}
+                  </div>
+                  {/* Layer 2: overlay */}
+                  <div style={{ position: "absolute", top: 0, left: 0, right: 0, bottom: 0, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", background: "rgba(10,14,26,0.75)", padding: "32px 28px" }}>
+                    <span style={{ fontSize: 11, fontWeight: 600, color: "#94a3b8", background: "rgba(255,255,255,0.08)", padding: "5px 14px", borderRadius: 20, marginBottom: 14 }}>Locked · $0.02</span>
+                    <h3 style={{ fontSize: 20, fontWeight: 600, color: "#e2e8f0", margin: "0 0 8px", textAlign: "center" }}>Risk Breakdown</h3>
+                    <p style={{ fontSize: 13, color: "#94a3b8", textAlign: "center", maxWidth: 320, lineHeight: 1.5, margin: "0 0 18px" }}>
+                      Want to know why this wallet scored {result.score}? See the full T1-T9 typology analysis behind this score.
+                    </p>
+                    <button onClick={() => unlockTier("breakdown")} disabled={!!loadingTier}
+                      style={{ ...btnP, padding: "12px 28px", fontSize: 14, opacity: loadingTier === "breakdown" ? 0.6 : 1, cursor: loadingTier === "breakdown" ? "not-allowed" : "pointer" }}>
+                      {loadingTier === "breakdown" ? (paymentState || "Unlocking...") : "Unlock Breakdown — $0.02"}
+                    </button>
+                  </div>
                 </div>
               ) : (
                 <div style={{ background: "rgba(255,255,255,0.02)", border: "1px solid rgba(255,255,255,0.08)", borderRadius: 16, padding: mob ? 20 : 24 }}>
@@ -325,21 +336,22 @@ export default function SolveraLanding() {
 
               {/* Tier 3: Full Trace */}
               {!unlockedTiers.trace ? (
-                <div style={{ position: "relative", overflow: "hidden", background: "rgba(255,255,255,0.02)", border: "1px solid rgba(255,255,255,0.06)", borderRadius: 16, padding: mob ? 20 : 24 }}>
-                  <div style={{ filter: "blur(5px)", opacity: 0.35, pointerEvents: "none", userSelect: "none" }}>
-                    <div style={{ fontSize: 13, fontWeight: 600, color: "#94a3b8", marginBottom: 10 }}>Full Trace</div>
-                    {[80, 65, 90, 55].map((w, i) => (
-                      <div key={i} style={{ height: 10, width: `${w}%`, background: "rgba(255,255,255,0.06)", borderRadius: 4, marginBottom: 8 }} />
+                <div style={{ position: "relative", overflow: "hidden", minHeight: 240, background: "rgba(255,255,255,0.02)", border: "1px solid rgba(255,255,255,0.08)", borderRadius: 16 }}>
+                  {/* Layer 1: blurred placeholder bars */}
+                  <div style={{ padding: 28, filter: "blur(6px)", opacity: 0.3, pointerEvents: "none", userSelect: "none" }}>
+                    {[[60, 16], [90, 10], [75, 10], [85, 10], [50, 10], [80, 10], [65, 10]].map(([w, h], i) => (
+                      <div key={i} style={{ height: h, width: `${w}%`, background: `rgba(255,255,255,${i === 0 ? 0.08 : 0.05})`, borderRadius: 4, marginBottom: i === 0 ? 16 : 8 }} />
                     ))}
                   </div>
-                  <div style={{ position: "absolute", inset: 0, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", background: "rgba(10,14,26,0.65)", backdropFilter: "blur(2px)", borderRadius: 16, padding: 20 }}>
-                    <span style={{ fontSize: 11, fontWeight: 600, color: "#94a3b8", background: "rgba(255,255,255,0.06)", padding: "4px 12px", borderRadius: 20, marginBottom: 12 }}>Locked · $0.08</span>
-                    <h3 style={{ fontSize: 15, fontWeight: 600, color: "#e2e8f0", marginBottom: 8 }}>Full Trace</h3>
-                    <p style={{ fontSize: 12, color: "#94a3b8", textAlign: "center", maxWidth: 260, lineHeight: 1.5, marginBottom: 14 }}>
+                  {/* Layer 2: overlay */}
+                  <div style={{ position: "absolute", top: 0, left: 0, right: 0, bottom: 0, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", background: "rgba(10,14,26,0.75)", padding: "32px 28px" }}>
+                    <span style={{ fontSize: 11, fontWeight: 600, color: "#94a3b8", background: "rgba(255,255,255,0.08)", padding: "5px 14px", borderRadius: 20, marginBottom: 14 }}>Locked · $0.08</span>
+                    <h3 style={{ fontSize: 20, fontWeight: 600, color: "#e2e8f0", margin: "0 0 8px", textAlign: "center" }}>Full Trace</h3>
+                    <p style={{ fontSize: 13, color: "#94a3b8", textAlign: "center", maxWidth: 320, lineHeight: 1.5, margin: "0 0 18px" }}>
                       Transaction patterns, protocol exposure, counterparty analysis, and complete risk context.
                     </p>
                     <button onClick={() => unlockTier("trace")} disabled={!!loadingTier}
-                      style={{ ...btnP, padding: "10px 22px", fontSize: 13, opacity: loadingTier === "trace" ? 0.7 : 1 }}>
+                      style={{ ...btnP, padding: "12px 28px", fontSize: 14, opacity: loadingTier === "trace" ? 0.6 : 1, cursor: loadingTier === "trace" ? "not-allowed" : "pointer" }}>
                       {loadingTier === "trace" ? (paymentState || "Unlocking...") : "Unlock Full Trace — $0.08"}
                     </button>
                   </div>
@@ -361,21 +373,22 @@ export default function SolveraLanding() {
 
               {/* Tier 4: Compliance Report */}
               {!unlockedTiers.report ? (
-                <div style={{ position: "relative", overflow: "hidden", background: "rgba(255,255,255,0.02)", border: "1px solid rgba(255,255,255,0.06)", borderRadius: 16, padding: mob ? 20 : 24 }}>
-                  <div style={{ filter: "blur(5px)", opacity: 0.35, pointerEvents: "none", userSelect: "none" }}>
-                    <div style={{ fontSize: 13, fontWeight: 600, color: "#94a3b8", marginBottom: 10 }}>Compliance Report</div>
-                    {[85, 70, 75].map((w, i) => (
-                      <div key={i} style={{ height: 10, width: `${w}%`, background: "rgba(255,255,255,0.06)", borderRadius: 4, marginBottom: 8 }} />
+                <div style={{ position: "relative", overflow: "hidden", minHeight: 240, background: "rgba(255,255,255,0.02)", border: "1px solid rgba(255,255,255,0.08)", borderRadius: 16 }}>
+                  {/* Layer 1: blurred placeholder bars */}
+                  <div style={{ padding: 28, filter: "blur(6px)", opacity: 0.3, pointerEvents: "none", userSelect: "none" }}>
+                    {[[60, 16], [90, 10], [75, 10], [85, 10], [50, 10], [80, 10], [65, 10]].map(([w, h], i) => (
+                      <div key={i} style={{ height: h, width: `${w}%`, background: `rgba(255,255,255,${i === 0 ? 0.08 : 0.05})`, borderRadius: 4, marginBottom: i === 0 ? 16 : 8 }} />
                     ))}
                   </div>
-                  <div style={{ position: "absolute", inset: 0, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", background: "rgba(10,14,26,0.65)", backdropFilter: "blur(2px)", borderRadius: 16, padding: 20 }}>
-                    <span style={{ fontSize: 11, fontWeight: 600, color: "#94a3b8", background: "rgba(255,255,255,0.06)", padding: "4px 12px", borderRadius: 20, marginBottom: 12 }}>Locked · $2.00</span>
-                    <h3 style={{ fontSize: 15, fontWeight: 600, color: "#e2e8f0", marginBottom: 8 }}>Compliance Report</h3>
-                    <p style={{ fontSize: 12, color: "#94a3b8", textAlign: "center", maxWidth: 260, lineHeight: 1.5, marginBottom: 14 }}>
+                  {/* Layer 2: overlay */}
+                  <div style={{ position: "absolute", top: 0, left: 0, right: 0, bottom: 0, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", background: "rgba(10,14,26,0.75)", padding: "32px 28px" }}>
+                    <span style={{ fontSize: 11, fontWeight: 600, color: "#94a3b8", background: "rgba(255,255,255,0.08)", padding: "5px 14px", borderRadius: 20, marginBottom: 14 }}>Locked · $2.00</span>
+                    <h3 style={{ fontSize: 20, fontWeight: 600, color: "#e2e8f0", margin: "0 0 8px", textAlign: "center" }}>Compliance Report</h3>
+                    <p style={{ fontSize: 13, color: "#94a3b8", textAlign: "center", maxWidth: 320, lineHeight: 1.5, margin: "0 0 18px" }}>
                       STR-ready PDF with FATF predicate crime mapping, 5W+2H framework, and recommended actions.
                     </p>
                     <button onClick={() => unlockTier("report")} disabled={!!loadingTier}
-                      style={{ ...btnP, padding: "10px 22px", fontSize: 13, opacity: loadingTier === "report" ? 0.7 : 1 }}>
+                      style={{ ...btnP, padding: "12px 28px", fontSize: 14, opacity: loadingTier === "report" ? 0.6 : 1, cursor: loadingTier === "report" ? "not-allowed" : "pointer" }}>
                       {loadingTier === "report" ? (paymentState || "Unlocking...") : "Generate Report — $2.00"}
                     </button>
                   </div>
