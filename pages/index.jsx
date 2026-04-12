@@ -280,13 +280,6 @@ export default function SolveraLanding() {
           <div style={{ ...card, marginTop: 32, animation: "fadeUp 0.5s ease-out" }}>
             <ScoreRing score={result.score} color={result.bandColor} size={mob ? 160 : 200} />
             <div style={{ textAlign: "center", marginTop: 12, fontSize: 14, fontWeight: 700, color: result.bandColor, textTransform: "uppercase", letterSpacing: 2 }}>{result.band}</div>
-            <div style={{ display: "flex", flexWrap: "wrap", gap: 6, justifyContent: "center", marginTop: 16 }}>
-              {result.tags.map(tag => {
-                const risk = result.breakdown.some(b => b.status !== "NONE");
-                return <span key={tag} style={{ padding: "5px 12px", borderRadius: 100, fontSize: 11, fontWeight: 600, background: risk ? "rgba(249,115,22,0.1)" : "rgba(34,197,94,0.1)", color: risk ? "#f97316" : "#22c55e", border: `1px solid ${risk ? "rgba(249,115,22,0.2)" : "rgba(34,197,94,0.2)"}` }}>{tag}</span>;
-              })}
-            </div>
-            <p style={{ fontSize: 13, color: "#94a3b8", lineHeight: 1.7, marginTop: 20, padding: 16, borderRadius: 10, background: "rgba(255,255,255,0.02)", border: "1px solid rgba(255,255,255,0.04)" }}>{result.summary}</p>
             {/* Tier cards — appear below free score */}
             <div style={{ display: "flex", flexDirection: "column", gap: 12, marginTop: 4 }}>
 
@@ -302,7 +295,32 @@ export default function SolveraLanding() {
                   </button>
                 </div>
               ) : (
-                <TypologyBreakdown breakdown={result.breakdown} />
+                <div style={{ background: "rgba(255,255,255,0.02)", border: "1px solid rgba(255,255,255,0.08)", borderRadius: 16, padding: mob ? 20 : 24 }}>
+                  {/* Header */}
+                  <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 16, flexWrap: "wrap", gap: 8 }}>
+                    <h3 style={{ fontSize: 17, fontWeight: 600, color: "#e2e8f0", margin: 0 }}>Risk Breakdown</h3>
+                    <span style={{ fontSize: 12, fontWeight: 600, color: result.bandColor, background: `${result.bandColor}18`, padding: "4px 12px", borderRadius: 20 }}>
+                      {result.score} / 1000 · {result.band}
+                    </span>
+                  </div>
+
+                  {/* Flag tags — moved from free score */}
+                  {result.typologies?.length > 0 || result.tags?.length > 0 ? (
+                    <div style={{ display: "flex", flexWrap: "wrap", gap: 6, marginBottom: 14 }}>
+                      {result.tags.map((tag, i) => (
+                        <span key={i} style={{ fontSize: 12, fontWeight: 500, color: "#f97316", border: "1px solid rgba(249,115,22,0.3)", padding: "4px 12px", borderRadius: 20 }}>{tag}</span>
+                      ))}
+                    </div>
+                  ) : null}
+
+                  {/* Explanation — moved from free score */}
+                  <div style={{ padding: "12px 16px", background: "rgba(255,255,255,0.02)", border: "1px solid rgba(255,255,255,0.06)", borderRadius: 10, marginBottom: 16 }}>
+                    <p style={{ fontSize: 13, color: "#cbd5e1", lineHeight: 1.65, margin: 0 }}>{result.summary}</p>
+                  </div>
+
+                  {/* T1-T9 grid */}
+                  <TypologyBreakdown breakdown={result.breakdown} />
+                </div>
               )}
 
               {/* Tier 3: Full Trace */}
