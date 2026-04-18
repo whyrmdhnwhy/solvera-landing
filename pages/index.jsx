@@ -185,7 +185,7 @@ export default function SolveraLanding() {
       <meta name="twitter:title" content="Solvera — Solana Wallet Risk Scoring" />
       <meta name="twitter:description" content="Instant AML risk scoring for any Solana wallet. 9 FATF-aligned typologies, pay-per-check USDC." />
 
-      <link rel="icon" href={LOGO_H} />
+      <link rel="icon" href="/favicon.png" type="image/png" />
       <link rel="preconnect" href="https://fonts.googleapis.com" />
       <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
       <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
