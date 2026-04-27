@@ -1,0 +1,68 @@
+{
+  "_meta": {
+    "version": "1.0.0",
+    "last_updated": "2026-04-27",
+    "source": "Public attributions from Chainalysis, Elliptic, OFAC SDN, Solana Foundation incident reports",
+    "note": "Static seed list. Update manually via PR. Each entry must include category and source."
+  },
+  "mixers": [
+    {
+      "address": "HkGz4KmoZ7Zmk7HN6ndJ31UJ1qZ2qgwQxgVqQwovpZES",
+      "label": "Drift Protocol Drainer",
+      "category": "exploit_drainer",
+      "incident": "Drift Protocol $285M exploit",
+      "incident_date": "2026-04-01",
+      "attribution": "DPRK (Lazarus Group) per Elliptic, Chainalysis, SEAL 911",
+      "source": "https://www.elliptic.co/blog/drift-protocol-exploited-for-286-million-in-suspected-dprk-linked-attack"
+    },
+    {
+      "address": "8ubo4HbWJHKyFJYJc2Gh74dxCP7bN7Fu2Pi13KZ9rGxw",
+      "label": "Drift Drainer Primary Launderer",
+      "category": "exploit_launderer",
+      "incident": "Drift Protocol $285M exploit",
+      "incident_date": "2026-04-01",
+      "attribution": "DPRK-linked",
+      "source": "https://cryip.co/drift-protocol-hack-280m-solana-defi-exploit-and-governance-takeover-explained/"
+    },
+    {
+      "address": "7igSaKEZKdfGy9nVB376FPcz4kVmR6MwMqdCCSb1Fgne",
+      "label": "Drift Drainer Secondary Launderer",
+      "category": "exploit_launderer",
+      "incident": "Drift Protocol $285M exploit",
+      "incident_date": "2026-04-01",
+      "attribution": "DPRK-linked",
+      "source": "https://cryip.co/drift-protocol-hack-280m-solana-defi-exploit-and-governance-takeover-explained/"
+    }
+  ],
+  "bridges": [
+    {
+      "address": "worm2ZoG2kUd4vFXhvjh93UUH596ayRfgQ2MgjNMTth",
+      "label": "Wormhole Bridge Program",
+      "category": "bridge_program",
+      "note": "Wormhole core bridge program ID on Solana. Interaction alone is not malicious; weight applied only when combined with other risk signals.",
+      "source": "https://docs.wormhole.com/wormhole/reference/contract-addresses"
+    },
+    {
+      "address": "wormDTUJ6AWPNvk59vGQbDvGJmqbDTdgWgAqcLBCgUb",
+      "label": "Wormhole Token Bridge",
+      "category": "bridge_program",
+      "source": "https://docs.wormhole.com/wormhole/reference/contract-addresses"
+    },
+    {
+      "address": "DEbrdGj3HsRsAzx6uH4MKyREKxVAfBydijLUF3ygsFfh",
+      "label": "deBridge Program",
+      "category": "bridge_program",
+      "source": "https://docs.debridge.finance/contracts/mainnet-addresses"
+    }
+  ],
+  "sanctions": [
+    {
+      "address": "HkGz4KmoZ7Zmk7HN6ndJ31UJ1qZ2qgwQxgVqQwovpZES",
+      "label": "DPRK-linked exploit address",
+      "category": "ofac_proximity",
+      "incident": "Drift Protocol exploit",
+      "attribution": "DPRK (Lazarus Group)",
+      "source": "https://www.chainalysis.com/blog/lessons-from-the-drift-hack/"
+    }
+  ]
+}
