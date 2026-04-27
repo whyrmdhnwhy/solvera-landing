@@ -739,7 +739,7 @@ export default function SolveraLanding() {
       {/* BOTTOM CTA */}
       <section style={{ textAlign: "center", padding: mob ? "48px 20px" : "72px 40px" }}>
         <h2 style={{ fontSize: mob ? 22 : 32, fontWeight: 600, marginBottom: 12, fontFamily: "'Fraunces', Georgia, serif" }}>
-          Solana compliance infrastructure is missing.<br /><span style={g}>We're building it.</span>
+          Solana compliance infrastructure is missing.<br /><span style={g}>We&apos;re building it.</span>
         </h2>
         <p style={{ color: "#6B7280", fontSize: mob ? 14 : 16, marginBottom: 32, maxWidth: 440, margin: "0 auto 32px" }}>
           Start with a free wallet check. Scale to full compliance infrastructure.

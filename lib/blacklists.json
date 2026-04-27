@@ -1,0 +1,9 @@
+{
+  "mixers": [],
+  "bridges": [
+    "wormDTUJ6AWPNvk59vGQbDvGJmqbDTdgWgAqcLBCgUb",
+    "worm2ZoG2kUd4vFXhvjh93UUH596ayRfgQ2MgjNMTth",
+    "Bridge1p5gheXUvJ6jGWGeCsgPKgnE3YgdGKRVCMY9o"
+  ],
+  "_note": "Verified bridge program IDs on Solana mainnet. wormDTU = Wormhole Core Bridge, worm2Zo = Wormhole Token Bridge. Mixer list intentionally empty until confirmed program IDs are sourced — do not add placeholders."
+}
