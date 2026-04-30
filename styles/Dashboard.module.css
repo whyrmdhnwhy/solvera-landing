@@ -1,0 +1,189 @@
+.container {
+  display: flex;
+  min-height: 100vh;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  background-color: #F7F1E8;
+}
+
+.sidebar {
+  width: 250px;
+  background-color: #1A1F2E;
+  color: #fff;
+  padding: 2rem 1rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 2rem;
+  text-align: center;
+  color: #DDAA55;
+}
+
+.navItem {
+  padding: 1rem;
+  margin-bottom: 0.5rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  color: #ccc;
+  text-decoration: none;
+}
+
+.navItem:hover, .navItem.active {
+  background-color: rgba(255, 255, 255, 0.1);
+  color: #fff;
+}
+
+.main {
+  flex: 1;
+  padding: 2rem;
+  overflow-y: auto;
+}
+
+.header {
+  margin-bottom: 2rem;
+}
+
+.title {
+  font-size: 2rem;
+  color: #1A1F2E;
+  margin-bottom: 0.5rem;
+}
+
+.subtitle {
+  color: #666;
+  font-size: 1rem;
+}
+
+.card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+  margin-bottom: 1.5rem;
+}
+
+.cardTitle {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  color: #1A1F2E;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 0.5rem;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+.tokenCard {
+  background: #fff;
+  border-radius: 12px;
+  padding: 1rem;
+  border: 1px solid #eee;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  transition: transform 0.2s;
+}
+
+.tokenCard:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+.tokenHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.tokenName {
+  font-weight: bold;
+  font-size: 1.1rem;
+}
+
+.tokenChain {
+  font-size: 0.8rem;
+  background: #eee;
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+  color: #555;
+}
+
+.tokenPrice {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #1A1F2E;
+}
+
+.tokenChange {
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.tokenChange.positive {
+  color: #10B981;
+}
+
+.tokenChange.negative {
+  color: #EF4444;
+}
+
+.button {
+  background-color: #DDAA55;
+  color: #1A1F2E;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  display: inline-block;
+}
+
+.button:hover {
+  background-color: #c99843;
+}
+
+.button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.input {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  font-size: 1rem;
+}
+
+.error {
+  color: #EF4444;
+  background: #FEE2E2;
+  padding: 1rem;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+}
+
+.success {
+  color: #059669;
+  background: #D1FAE5;
+  padding: 1rem;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+}
+
+.flexBetween {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
