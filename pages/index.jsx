@@ -654,15 +654,18 @@ export default function SolveraLanding() {
         )}
       </section>
 
-      {/* VIDEO DEMO PLACEHOLDER */}
+      {/* VIDEO DEMO */}
       <section style={{ ...sec, paddingTop: 0 }}>
-        <div style={{ ...card, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", minHeight: mob ? 200 : 300, position: "relative", overflow: "hidden", cursor: "pointer", background: "linear-gradient(135deg, rgba(10,76,94,0.03), rgba(184,105,28,0.03))" }}>
-          <div style={{ width: 64, height: 64, borderRadius: "50%", background: "rgba(26,31,46,0.08)", border: "2px solid rgba(255,255,255,0.15)", display: "flex", alignItems: "center", justifyContent: "center", marginBottom: 16 }}>
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="white"><path d="M8 5v14l11-7z" /></svg>
-          </div>
-          <p style={{ fontSize: 15, fontWeight: 600, color: "#1A1F2E" }}>See It In Action</p>
-          <p style={{ fontSize: 12, color: "#64748b", marginTop: 4 }}>Watch the 2-minute demo</p>
-          <div style={{ position: "absolute", top: 12, right: 12, padding: "4px 10px", borderRadius: 6, background: "rgba(26,31,46,0.07)", fontSize: 10, color: "#64748b" }}>Coming Soon</div>
+        <div style={{ ...card, padding: 0, overflow: "hidden", background: "#000" }}>
+          <video 
+            src="/demo.mov" 
+            controls 
+            autoPlay 
+            muted 
+            loop 
+            playsInline 
+            style={{ width: "100%", height: "auto", display: "block" }}
+          />
         </div>
       </section>
 
