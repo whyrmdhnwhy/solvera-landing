@@ -8,9 +8,39 @@ html {
   scroll-behavior: smooth;
 }
 
+:root {
+  --bg-main: #F7F1E8;
+  --text-main: #1A1F2E;
+  --bg-card: #FFFFFF;
+  --bg-nav: #0C1222;
+  --text-nav: #FFFFFF;
+  --bg-badge: #EFE8DC;
+  --border-light: rgba(26,31,46,0.08);
+  --border-card: rgba(26,31,46,0.06);
+  --text-muted: #6B7280;
+  --text-dim: #9CA3AF;
+  --card-shadow: 0 1px 4px rgba(26,31,46,0.06);
+  --bg-input: #FFFFFF;
+}
+
+[data-theme='dark'] {
+  --bg-main: #0B0E14;
+  --text-main: #E2E8F0;
+  --bg-card: #151A26;
+  --bg-nav: #0B0E14;
+  --text-nav: #E2E8F0;
+  --bg-badge: #1E293B;
+  --border-light: rgba(255,255,255,0.08);
+  --border-card: rgba(255,255,255,0.06);
+  --text-muted: #94A3B8;
+  --text-dim: #64748B;
+  --card-shadow: 0 4px 12px rgba(0,0,0,0.5);
+  --bg-input: #1E293B;
+}
+
 body {
-  background: #F7F1E8;
-  color: #1A1F2E;
+  background: var(--bg-main);
+  color: var(--text-main);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
