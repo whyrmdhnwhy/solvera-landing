@@ -6,6 +6,10 @@
  */
 
 const { fetchWalletData, ADDR_REGEX } = require('../../../lib/walletData')
+const { connect, trackScan } = require('../../../lib/redis')
+
+// Ensure Redis is connected for scan tracking
+connect()
 
 export default async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*')
@@ -19,6 +23,10 @@ export default async function handler(req, res) {
 
   try {
     const data = await fetchWalletData(address)
+
+    // Track this scan (fire-and-forget, non-blocking)
+    trackScan(address).catch(() => {})
+
     return res.status(200).json(data)
   } catch (err) {
     console.error('[wallet]', err.message, err.stack)

@@ -64,7 +64,7 @@ function TypologyBreakdown({ breakdown }) {
   const shown = exp ? breakdown : flagged.slice(0, 3);
   return (
     <div style={{ marginTop: 16 }}>
-      <div onClick={() => setExp(!exp)} style={{ display: "flex", alignItems: "center", gap: 8, cursor: "pointer", padding: "10px 14px", borderRadius: 10, background: "#F5EFE6", border: "1px solid rgba(26,31,46,0.07)", marginBottom: 8 }}>
+      <div onClick={() => setExp(!exp)} style={{ display: "flex", alignItems: "center", gap: 8, cursor: "pointer", padding: "10px 14px", borderRadius: 10, background: "#F5EFE6", border: "1px solid var(--border-card)", marginBottom: 8 }}>
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#6B7280" strokeWidth="2">
           <path d="M9 18l6-6-6-6" style={{ transform: exp ? "rotate(90deg)" : "none", transformOrigin: "center", transition: "transform 0.2s" }} />
         </svg>
@@ -74,7 +74,7 @@ function TypologyBreakdown({ breakdown }) {
       {(exp || flagged.length > 0) && (
         <div style={{ display: "flex", flexDirection: "column", gap: 4 }}>
           {shown.map(t => (
-            <div key={t.code} style={{ display: "flex", alignItems: "center", gap: 10, padding: "8px 12px", borderRadius: 8, background: "#FFFFFF", borderLeft: `3px solid ${sc[t.status]}` }}>
+            <div key={t.code} style={{ display: "flex", alignItems: "center", gap: 10, padding: "8px 12px", borderRadius: 8, background: "var(--bg-card)", borderLeft: `3px solid ${sc[t.status]}` }}>
               <span style={{ fontSize: 11, fontWeight: 700, color: sc[t.status], minWidth: 24 }}>{t.code}</span>
               <span style={{ fontSize: 12, color: "#374151", flex: 1 }}>{t.label}</span>
               <span style={{ fontSize: 10, fontWeight: 600, padding: "2px 8px", borderRadius: 4, background: `${sc[t.status]}15`, color: sc[t.status] }}>{t.status}</span>
@@ -175,10 +175,10 @@ export default function SolveraLanding() {
   };
 
   const g = { background: "linear-gradient(135deg, #0A4C5E, #B8691C)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" };
-  const card = { background: "#FFFFFF", border: "1px solid rgba(26,31,46,0.08)", borderRadius: 16, padding: mob ? 20 : 28, boxShadow: "0 1px 4px rgba(26,31,46,0.06)" };
-  const btnP = { padding: "14px 28px", background: "#0A4C5E", color: "#F7F1E8", fontWeight: 700, fontSize: 15, border: "none", borderRadius: 12, cursor: "pointer", transition: "all 0.1s", boxShadow: "0 1px 3px rgba(10,76,94,0.25)" };
-  const btnS = { padding: "14px 28px", background: "#FFFFFF", color: "#1A1F2E", fontWeight: 600, fontSize: 14, border: "1px solid rgba(26,31,46,0.15)", borderRadius: 12, cursor: "pointer", transition: "all 0.1s", boxShadow: "0 1px 2px rgba(26,31,46,0.06)" };
-  const inp = { flex: 1, padding: "14px 16px", background: "#FFFFFF", border: "1px solid rgba(26,31,46,0.12)", borderRadius: 12, color: "#1A1F2E", fontSize: 14, outline: "none", fontFamily: "'Inter',sans-serif", boxShadow: "0 1px 2px rgba(26,31,46,0.04)" };
+  const card = { background: "var(--bg-card)", border: "1px solid var(--border-light)", borderRadius: 16, padding: mob ? 20 : 28, boxShadow: "var(--card-shadow)" };
+  const btnP = { padding: "14px 28px", background: "#0A4C5E", color: "var(--bg-main)", fontWeight: 700, fontSize: 15, border: "none", borderRadius: 12, cursor: "pointer", transition: "all 0.1s", boxShadow: "0 1px 3px rgba(10,76,94,0.25)" };
+  const btnS = { padding: "14px 28px", background: "var(--bg-card)", color: "var(--text-main)", fontWeight: 600, fontSize: 14, border: "1px solid rgba(26,31,46,0.15)", borderRadius: 12, cursor: "pointer", transition: "all 0.1s", boxShadow: "var(--card-shadow)" };
+  const inp = { flex: 1, padding: "14px 16px", background: "var(--bg-card)", border: "1px solid rgba(26,31,46,0.12)", borderRadius: 12, color: "var(--text-main)", fontSize: 14, outline: "none", fontFamily: "'Inter',sans-serif", boxShadow: "var(--card-shadow)" };
   const sec = { padding: mob ? "48px 20px" : "72px 40px", maxWidth: 920, margin: "0 auto" };
 
   return (
@@ -222,26 +222,26 @@ export default function SolveraLanding() {
       `}</style>
 
       {/* NAV */}
-      <nav style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: mob ? "16px 20px" : "20px 40px", position: "sticky", top: 0, zIndex: 50, background: "#0C1222", backdropFilter: "blur(12px)" }}>
+      <nav style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: mob ? "16px 20px" : "20px 40px", position: "sticky", top: 0, zIndex: 50, background: "var(--bg-nav)", backdropFilter: "blur(12px)" }}>
         <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
           <img src={LOGO_H} alt="Solvera" style={{ height: mob ? 36 : 44 }} />
         </div>
         <div style={{ display: "flex", gap: 8, alignItems: "center" }}>
           <a href="https://rise.rich/trade/H2goTkKAr13GZC5q1c28QM8jCHGLj2cFNzQKtabGrise" target="_blank" rel="noopener noreferrer" style={{ padding: "10px 20px", fontSize: 13, background: "#818CF8", color: "#ffffff", fontWeight: 600, border: "none", borderRadius: 10, cursor: "pointer", textDecoration: "none", boxShadow: "0 4px 14px 0 rgba(129, 140, 248, 0.39)" }}>$SOLVERA</a>
-          <Link href="/dashboard" style={{ padding: "10px 20px", fontSize: 13, background: "#B8691C", color: "#F7F1E8", fontWeight: 600, border: "none", borderRadius: 10, cursor: "pointer", textDecoration: "none" }}>Scan Token</Link>
-          <button onClick={() => demoRef.current?.scrollIntoView({ behavior: "smooth" })} style={{ padding: "10px 20px", fontSize: 13, background: "#0A4C5E", color: "#F7F1E8", fontWeight: 600, border: "none", borderRadius: 10, cursor: "pointer" }}>Try Free</button>
-          {!mob && <a href="https://t.me/solverahq" target="_blank" rel="noopener noreferrer" style={{ padding: "10px 20px", fontSize: 13, background: "transparent", color: "#94A3B8", fontWeight: 500, border: "1px solid rgba(255,255,255,0.12)", borderRadius: 10, cursor: "pointer", textDecoration: "none", display: "inline-flex", alignItems: "center", gap: 6 }}>
+          <Link href="/dashboard" style={{ padding: "10px 20px", fontSize: 13, background: "#B8691C", color: "var(--bg-main)", fontWeight: 600, border: "none", borderRadius: 10, cursor: "pointer", textDecoration: "none" }}>Scan Token</Link>
+          <button onClick={() => demoRef.current?.scrollIntoView({ behavior: "smooth" })} style={{ padding: "10px 20px", fontSize: 13, background: "#0A4C5E", color: "var(--bg-main)", fontWeight: 600, border: "none", borderRadius: 10, cursor: "pointer" }}>Try Free</button>
+          {!mob && <a href="https://t.me/solverahq" target="_blank" rel="noopener noreferrer" style={{ padding: "10px 20px", fontSize: 13, background: "transparent", color: "var(--text-muted)", fontWeight: 500, border: "1px solid rgba(255,255,255,0.12)", borderRadius: 10, cursor: "pointer", textDecoration: "none", display: "inline-flex", alignItems: "center", gap: 6 }}>
             <svg width="14" height="14" viewBox="0 0 24 24" fill="#94A3B8"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221l-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.446 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.334-.373-.121l-6.869 4.326-2.96-.924c-.643-.203-.657-.643.136-.953l11.566-4.458c.537-.194 1.006.131.832.94z"/></svg>
             Community
           </a>}
-          {!mob && <a href="https://t.me/solveraHQ_bot" target="_blank" rel="noopener noreferrer" style={{ padding: "10px 20px", fontSize: 13, background: "transparent", color: "#94A3B8", fontWeight: 500, border: "1px solid rgba(255,255,255,0.12)", borderRadius: 10, cursor: "pointer", textDecoration: "none", display: "inline-flex", alignItems: "center", gap: 6 }}>
+          {!mob && <a href="https://t.me/solveraHQ_bot" target="_blank" rel="noopener noreferrer" style={{ padding: "10px 20px", fontSize: 13, background: "transparent", color: "var(--text-muted)", fontWeight: 500, border: "1px solid rgba(255,255,255,0.12)", borderRadius: 10, cursor: "pointer", textDecoration: "none", display: "inline-flex", alignItems: "center", gap: 6 }}>
             <svg width="14" height="14" viewBox="0 0 24 24" fill="#94A3B8"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221l-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.446 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.334-.373-.121l-6.869 4.326-2.96-.924c-.643-.203-.657-.643.136-.953l11.566-4.458c.537-.194 1.006.131.832.94z"/></svg>
             Telegram Bot
           </a>}
-          <button onClick={toggleTheme} style={{ padding: "8px", background: "transparent", border: "1px solid rgba(255,255,255,0.12)", borderRadius: 10, color: "#94A3B8", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center" }} aria-label="Toggle Theme">
+          <button onClick={toggleTheme} style={{ padding: "8px", background: "transparent", border: "1px solid rgba(255,255,255,0.12)", borderRadius: 10, color: "var(--text-muted)", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center" }} aria-label="Toggle Theme">
             {theme === 'dark' ? '☀️' : '🌙'}
           </button>
-          <button onClick={toggleLang} style={{ padding: "8px 12px", background: "transparent", border: "1px solid rgba(255,255,255,0.12)", borderRadius: 10, color: "#94A3B8", cursor: "pointer", fontSize: 13, fontWeight: 600 }}>
+          <button onClick={toggleLang} style={{ padding: "8px 12px", background: "transparent", border: "1px solid rgba(255,255,255,0.12)", borderRadius: 10, color: "var(--text-muted)", cursor: "pointer", fontSize: 13, fontWeight: 600 }}>
             {lang === 'en' ? '中' : 'EN'}
           </button>
         </div>
@@ -342,7 +342,7 @@ export default function SolveraLanding() {
 
               {/* Tier 2: Risk Breakdown */}
               {!unlockedTiers.breakdown ? (
-                <div style={{ position: "relative", overflow: "hidden", minHeight: 240, background: "#FFFFFF", border: "1px solid rgba(255,255,255,0.08)", borderRadius: 16 }}>
+                <div style={{ position: "relative", overflow: "hidden", minHeight: 240, background: "var(--bg-card)", border: "1px solid rgba(255,255,255,0.08)", borderRadius: 16 }}>
                   {/* Layer 1: blurred placeholder bars */}
                   <div style={{ padding: 28, filter: "blur(6px)", opacity: 0.3, pointerEvents: "none", userSelect: "none" }}>
                     {[[60, 16], [90, 10], [75, 10], [85, 10], [50, 10], [80, 10], [65, 10]].map(([w, h], i) => (
@@ -352,7 +352,7 @@ export default function SolveraLanding() {
                   {/* Layer 2: overlay */}
                   <div style={{ position: "absolute", top: 0, left: 0, right: 0, bottom: 0, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", background: "rgba(247,241,232,0.93)", padding: "32px 28px" }}>
                     <span style={{ fontSize: 11, fontWeight: 600, color: "#6B7280", background: "rgba(26,31,46,0.08)", padding: "5px 14px", borderRadius: 20, marginBottom: 14 }}>Locked · $0.02</span>
-                    <h3 style={{ fontSize: 20, fontWeight: 600, color: "#1A1F2E", margin: "0 0 8px", textAlign: "center" }}>Risk Breakdown</h3>
+                    <h3 style={{ fontSize: 20, fontWeight: 600, color: "var(--text-main)", margin: "0 0 8px", textAlign: "center" }}>Risk Breakdown</h3>
                     <p style={{ fontSize: 13, color: "#6B7280", textAlign: "center", maxWidth: 320, lineHeight: 1.5, margin: "0 0 18px" }}>
                       Want to know why this wallet scored {result.risk?.score}? See the full T1-T9 typology analysis behind this score.
                     </p>
@@ -363,9 +363,9 @@ export default function SolveraLanding() {
                   </div>
                 </div>
               ) : (
-                <div style={{ background: "#FFFFFF", border: "1px solid rgba(255,255,255,0.08)", borderRadius: 16, padding: mob ? 20 : 24 }}>
+                <div style={{ background: "var(--bg-card)", border: "1px solid rgba(255,255,255,0.08)", borderRadius: 16, padding: mob ? 20 : 24 }}>
                   <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 16, flexWrap: "wrap", gap: 8 }}>
-                    <h3 style={{ fontSize: 17, fontWeight: 600, color: "#1A1F2E", margin: 0 }}>Risk Breakdown</h3>
+                    <h3 style={{ fontSize: 17, fontWeight: 600, color: "var(--text-main)", margin: 0 }}>Risk Breakdown</h3>
                     {(() => {
                       const band = unlockedTiers.breakdown?.riskBand ?? result.risk?.level;
                       const c = band === "HIGH" ? "#B8321C" : band === "ELEVATED" ? "#C2541C" : band === "MODERATE" ? "#B8861C" : "#2D7A4F";
@@ -386,7 +386,7 @@ export default function SolveraLanding() {
                   )}
                   {/* Risk details */}
                   {result.risk?.details?.length > 0 && (
-                    <div style={{ padding: "12px 16px", background: "#FFFFFF", border: "1px solid rgba(26,31,46,0.07)", borderRadius: 10, marginBottom: 16 }}>
+                    <div style={{ padding: "12px 16px", background: "var(--bg-card)", border: "1px solid var(--border-card)", borderRadius: 10, marginBottom: 16 }}>
                       {result.risk.details.map((d, i) => (
                         <p key={i} style={{ fontSize: 12, color: "#374151", lineHeight: 1.65, margin: i > 0 ? "8px 0 0" : 0 }}>• {d}</p>
                       ))}
@@ -396,7 +396,7 @@ export default function SolveraLanding() {
                   {unlockedTiers.breakdown?.typologies && (
                     <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
                       {Object.values(unlockedTiers.breakdown.typologies).map(t => (
-                        <div key={t.code} style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "8px 12px", background: "#FFFFFF", borderRadius: 8, border: `1px solid ${t.triggered ? "rgba(184,50,28,0.15)" : "#EFE8DC"}` }}>
+                        <div key={t.code} style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "8px 12px", background: "var(--bg-card)", borderRadius: 8, border: `1px solid ${t.triggered ? "rgba(184,50,28,0.15)" : "#EFE8DC"}` }}>
                           <span style={{ fontSize: 12, color: t.triggered ? "#B8321C" : "#475569", fontWeight: t.triggered ? 600 : 400 }}>{t.code}: {t.name}</span>
                           <span style={{ fontSize: 11, color: t.triggered ? "#B8321C" : "#2D7A4F" }}>{t.triggered ? `+${t.score}` : "CLEAR"}</span>
                         </div>
@@ -408,7 +408,7 @@ export default function SolveraLanding() {
 
               {/* Tier 3: Full Trace */}
               {!unlockedTiers.trace ? (
-                <div style={{ position: "relative", overflow: "hidden", minHeight: 240, background: "#FFFFFF", border: "1px solid rgba(255,255,255,0.08)", borderRadius: 16 }}>
+                <div style={{ position: "relative", overflow: "hidden", minHeight: 240, background: "var(--bg-card)", border: "1px solid rgba(255,255,255,0.08)", borderRadius: 16 }}>
                   {/* Layer 1: blurred placeholder bars */}
                   <div style={{ padding: 28, filter: "blur(6px)", opacity: 0.3, pointerEvents: "none", userSelect: "none" }}>
                     {[[60, 16], [90, 10], [75, 10], [85, 10], [50, 10], [80, 10], [65, 10]].map(([w, h], i) => (
@@ -418,7 +418,7 @@ export default function SolveraLanding() {
                   {/* Layer 2: overlay */}
                   <div style={{ position: "absolute", top: 0, left: 0, right: 0, bottom: 0, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", background: "rgba(247,241,232,0.93)", padding: "32px 28px" }}>
                     <span style={{ fontSize: 11, fontWeight: 600, color: "#6B7280", background: "rgba(26,31,46,0.08)", padding: "5px 14px", borderRadius: 20, marginBottom: 14 }}>Locked · $0.08</span>
-                    <h3 style={{ fontSize: 20, fontWeight: 600, color: "#1A1F2E", margin: "0 0 8px", textAlign: "center" }}>Full Trace</h3>
+                    <h3 style={{ fontSize: 20, fontWeight: 600, color: "var(--text-main)", margin: "0 0 8px", textAlign: "center" }}>Full Trace</h3>
                     <p style={{ fontSize: 13, color: "#6B7280", textAlign: "center", maxWidth: 320, lineHeight: 1.5, margin: "0 0 18px" }}>
                       Transaction patterns, protocol exposure, counterparty analysis, and complete risk context.
                     </p>
@@ -429,10 +429,10 @@ export default function SolveraLanding() {
                   </div>
                 </div>
               ) : (
-                <div style={{ background: "#FFFFFF", border: "1px solid rgba(26,31,46,0.07)", borderRadius: 16, padding: mob ? 20 : 24 }}>
+                <div style={{ background: "var(--bg-card)", border: "1px solid var(--border-card)", borderRadius: 16, padding: mob ? 20 : 24 }}>
                   {/* Header */}
                   <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 16, flexWrap: "wrap", gap: 8 }}>
-                    <h3 style={{ fontSize: 17, fontWeight: 600, color: "#1A1F2E", margin: 0 }}>Full Trace</h3>
+                    <h3 style={{ fontSize: 17, fontWeight: 600, color: "var(--text-main)", margin: 0 }}>Full Trace</h3>
                     {(() => {
                       const band = unlockedTiers.trace?.band ?? result.risk?.level;
                       const c = band === "HIGH" ? "#B8321C" : band === "ELEVATED" ? "#C2541C" : band === "MODERATE" ? "#B8861C" : "#2D7A4F";
@@ -455,7 +455,7 @@ export default function SolveraLanding() {
 
                   {/* Explanation */}
                   {unlockedTiers.trace?.explanation && (
-                    <div style={{ padding: "12px 16px", background: "#FFFFFF", border: "1px solid rgba(26,31,46,0.07)", borderRadius: 10, marginBottom: 16 }}>
+                    <div style={{ padding: "12px 16px", background: "var(--bg-card)", border: "1px solid var(--border-card)", borderRadius: 10, marginBottom: 16 }}>
                       <p style={{ fontSize: 12, color: "#374151", lineHeight: 1.65, margin: 0 }}>{unlockedTiers.trace.explanation}</p>
                     </div>
                   )}
@@ -464,7 +464,7 @@ export default function SolveraLanding() {
                   {unlockedTiers.trace?.typologies && (
                     <div style={{ display: "flex", flexDirection: "column", gap: 6, marginBottom: 20 }}>
                       {Object.values(unlockedTiers.trace.typologies).map(t => (
-                        <div key={t.code} style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "8px 12px", background: "#FFFFFF", borderRadius: 8, border: `1px solid ${t.triggered ? "rgba(184,50,28,0.15)" : "#EFE8DC"}` }}>
+                        <div key={t.code} style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "8px 12px", background: "var(--bg-card)", borderRadius: 8, border: `1px solid ${t.triggered ? "rgba(184,50,28,0.15)" : "#EFE8DC"}` }}>
                           <span style={{ fontSize: 12, color: t.triggered ? "#B8321C" : "#475569", fontWeight: t.triggered ? 600 : 400 }}>{t.code}: {t.name}</span>
                           <span style={{ fontSize: 11, color: t.triggered ? "#B8321C" : "#2D7A4F" }}>{t.triggered ? `+${t.score}` : "CLEAR"}</span>
                         </div>
@@ -489,17 +489,17 @@ export default function SolveraLanding() {
                           <div style={{ fontSize: 13, fontWeight: 600, color: "#6B7280", marginBottom: 10, letterSpacing: 0.5 }}>Transaction Behavior</div>
                           {/* Stat row */}
                           <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 6, marginBottom: 10 }}>
-                            <div style={{ padding: "10px 12px", background: "#FFFFFF", borderRadius: 8, border: "1px solid rgba(26,31,46,0.06)" }}>
+                            <div style={{ padding: "10px 12px", background: "var(--bg-card)", borderRadius: 8, border: "1px solid var(--border-card)" }}>
                               <div style={{ fontSize: 10, color: "#64748b", marginBottom: 4 }}>Analyzed</div>
-                              <div style={{ fontSize: 15, fontWeight: 700, color: "#1A1F2E" }}>{tb.analyzed}</div>
+                              <div style={{ fontSize: 15, fontWeight: 700, color: "var(--text-main)" }}>{tb.analyzed}</div>
                               <div style={{ fontSize: 10, color: "#475569", marginTop: 2 }}>of {tb.realCount30d ?? "?"}{tb.fetchWindowCapped ? " · recent" : ""}</div>
                             </div>
-                            <div style={{ padding: "10px 12px", background: "#FFFFFF", borderRadius: 8, border: "1px solid rgba(26,31,46,0.06)" }}>
+                            <div style={{ padding: "10px 12px", background: "var(--bg-card)", borderRadius: 8, border: "1px solid var(--border-card)" }}>
                               <div style={{ fontSize: 10, color: "#64748b", marginBottom: 4 }}>Activity</div>
-                              <div style={{ fontSize: 15, fontWeight: 700, color: "#1A1F2E" }}>{tb.txPerDay}</div>
+                              <div style={{ fontSize: 15, fontWeight: 700, color: "var(--text-main)" }}>{tb.txPerDay}</div>
                               <div style={{ fontSize: 10, color: "#475569", marginTop: 2 }}>txs / day</div>
                             </div>
-                            <div style={{ padding: "10px 12px", background: tb.failedTx7d > 0 ? "rgba(184,50,28,0.04)" : "#FFFFFF", borderRadius: 8, border: tb.failedTx7d > 0 ? "1px solid rgba(239,68,68,0.15)" : "1px solid rgba(26,31,46,0.06)" }}>
+                            <div style={{ padding: "10px 12px", background: tb.failedTx7d > 0 ? "rgba(184,50,28,0.04)" : "var(--bg-card)", borderRadius: 8, border: tb.failedTx7d > 0 ? "1px solid rgba(239,68,68,0.15)" : "1px solid rgba(26,31,46,0.06)" }}>
                               <div style={{ fontSize: 10, color: "#64748b", marginBottom: 4 }}>Failed (7d)</div>
                               <div style={{ fontSize: 15, fontWeight: 700, color: tb.failedTx7d > 0 ? "#B8321C" : "#2D7A4F" }}>{tb.failedTx7d ?? 0}</div>
                               <div style={{ fontSize: 10, color: "#475569", marginTop: 2 }}>over {tb.spanDays}d span</div>
@@ -507,7 +507,7 @@ export default function SolveraLanding() {
                           </div>
                           {/* Type distribution — bar relative to top type, all rows shown */}
                           {allTypes.length > 0 && (
-                            <div style={{ background: "#FFFFFF", border: "1px solid rgba(26,31,46,0.06)", borderRadius: 8, padding: "10px 12px" }}>
+                            <div style={{ background: "var(--bg-card)", border: "1px solid var(--border-card)", borderRadius: 8, padding: "10px 12px" }}>
                               <div style={{ fontSize: 10, color: "#64748b", marginBottom: 10 }}>Transaction types · bar = share of total {totalTyped}</div>
                               <div style={{ display: "flex", flexDirection: "column", gap: 7 }}>
                                 {allTypes.map(([type, count]) => {
@@ -539,13 +539,13 @@ export default function SolveraLanding() {
                         <div style={{ marginBottom: 18 }}>
                           <div style={{ fontSize: 13, fontWeight: 600, color: "#6B7280", marginBottom: 10, letterSpacing: 0.5 }}>Value Flow</div>
                           <div style={{ display: "flex", gap: 10, marginBottom: 8 }}>
-                            <div style={{ flex: 1, padding: "12px 14px", borderRadius: 10, background: "#FFFFFF", border: "1px solid rgba(26,31,46,0.07)" }}>
+                            <div style={{ flex: 1, padding: "12px 14px", borderRadius: 10, background: "var(--bg-card)", border: "1px solid var(--border-card)" }}>
                               <div style={{ fontSize: 11, color: "#64748b", marginBottom: 4 }}>Net Flow</div>
                               <div style={{ fontSize: 18, fontWeight: 700, color: netPositive ? "#2D7A4F" : "#B8321C" }}>{netPositive ? "+" : ""}{vf.netFlow.toFixed(2)} SOL</div>
                             </div>
-                            <div style={{ flex: 1, padding: "12px 14px", borderRadius: 10, background: "#FFFFFF", border: "1px solid rgba(26,31,46,0.07)" }}>
+                            <div style={{ flex: 1, padding: "12px 14px", borderRadius: 10, background: "var(--bg-card)", border: "1px solid var(--border-card)" }}>
                               <div style={{ fontSize: 11, color: "#64748b", marginBottom: 4 }}>Transfers</div>
-                              <div style={{ fontSize: 18, fontWeight: 700, color: "#1A1F2E" }}>{vf.transferCount}</div>
+                              <div style={{ fontSize: 18, fontWeight: 700, color: "var(--text-main)" }}>{vf.transferCount}</div>
                             </div>
                           </div>
                           <div style={{ fontSize: 12, color: "#6B7280", display: "flex", gap: 16, flexWrap: "wrap" }}>
@@ -563,23 +563,23 @@ export default function SolveraLanding() {
                         <div style={{ marginBottom: 18 }}>
                           <div style={{ fontSize: 13, fontWeight: 600, color: "#6B7280", marginBottom: 10, letterSpacing: 0.5 }}>Counterparties</div>
                           <div style={{ display: "flex", gap: 6, marginBottom: 10 }}>
-                            <div style={{ flex: 1, padding: "8px 10px", background: "#FFFFFF", borderRadius: 6, textAlign: "center" }}>
+                            <div style={{ flex: 1, padding: "8px 10px", background: "var(--bg-card)", borderRadius: 6, textAlign: "center" }}>
                               <div style={{ fontSize: 10, color: "#64748b", marginBottom: 2 }}>Inbound Sources</div>
-                              <div style={{ fontSize: 15, fontWeight: 700, color: "#1A1F2E" }}>{ca.uniqueInbound}</div>
+                              <div style={{ fontSize: 15, fontWeight: 700, color: "var(--text-main)" }}>{ca.uniqueInbound}</div>
                             </div>
-                            <div style={{ flex: 1, padding: "8px 10px", background: "#FFFFFF", borderRadius: 6, textAlign: "center" }}>
+                            <div style={{ flex: 1, padding: "8px 10px", background: "var(--bg-card)", borderRadius: 6, textAlign: "center" }}>
                               <div style={{ fontSize: 10, color: "#64748b", marginBottom: 2 }}>Outbound Targets</div>
-                              <div style={{ fontSize: 15, fontWeight: 700, color: "#1A1F2E" }}>{ca.uniqueOutbound}</div>
+                              <div style={{ fontSize: 15, fontWeight: 700, color: "var(--text-main)" }}>{ca.uniqueOutbound}</div>
                             </div>
-                            <div style={{ flex: 1, padding: "8px 10px", background: "#FFFFFF", borderRadius: 6, textAlign: "center" }}>
+                            <div style={{ flex: 1, padding: "8px 10px", background: "var(--bg-card)", borderRadius: 6, textAlign: "center" }}>
                               <div style={{ fontSize: 10, color: "#64748b", marginBottom: 2 }}>Total Unique</div>
-                              <div style={{ fontSize: 15, fontWeight: 700, color: "#1A1F2E" }}>{ca.totalUnique}</div>
+                              <div style={{ fontSize: 15, fontWeight: 700, color: "var(--text-main)" }}>{ca.totalUnique}</div>
                             </div>
                           </div>
                           {ca.topCounterparties?.length > 0 && (
                             <div style={{ display: "flex", flexDirection: "column" }}>
                               {ca.topCounterparties.map((cp, i) => (
-                                <div key={i} style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "8px 12px", background: i % 2 === 0 ? "#FFFFFF" : "transparent", borderRadius: 6, fontSize: 12 }}>
+                                <div key={i} style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "8px 12px", background: i % 2 === 0 ? "var(--bg-card)" : "transparent", borderRadius: 6, fontSize: 12 }}>
                                   <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 11, color: "#6B7280", minWidth: 90 }}>{cp.address}</span>
                                   <span style={{ color: cp.totalVolume > 1000 ? "#B8861C" : "#64748b", fontWeight: cp.totalVolume > 1000 ? 600 : 400 }}>{cp.totalVolume.toLocaleString()} SOL</span>
                                   <span style={{ color: "#64748b", fontSize: 11 }}>{cp.txCount} txs</span>
@@ -596,14 +596,14 @@ export default function SolveraLanding() {
                       <div style={{ marginBottom: 18 }}>
                         <div style={{ fontSize: 13, fontWeight: 600, color: "#6B7280", marginBottom: 10, letterSpacing: 0.5 }}>Protocol Exposure</div>
                         {unlockedTiers.trace.protocolExposure.length === 0 ? (
-                          <div style={{ padding: "12px 16px", borderRadius: 10, background: "#FFFFFF", border: "1px solid rgba(26,31,46,0.06)", fontSize: 13, color: "#64748b" }}>
+                          <div style={{ padding: "12px 16px", borderRadius: 10, background: "var(--bg-card)", border: "1px solid var(--border-card)", fontSize: 13, color: "#64748b" }}>
                             No notable protocol interactions detected in the analysis window.
                           </div>
                         ) : (
                           <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
                             {unlockedTiers.trace.protocolExposure.map((p, i) => (
-                              <div key={i} style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "8px 12px", fontSize: 12, background: p.risk === "high" ? "rgba(184,50,28,0.05)" : "#FFFFFF", border: `1px solid ${p.risk === "high" ? "rgba(184,50,28,0.10)" : "#EFE8DC"}`, borderRadius: 8 }}>
-                                <span style={{ color: "#1A1F2E", fontWeight: 500 }}>{p.name}</span>
+                              <div key={i} style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "8px 12px", fontSize: 12, background: p.risk === "high" ? "rgba(184,50,28,0.05)" : "var(--bg-card)", border: `1px solid ${p.risk === "high" ? "rgba(184,50,28,0.10)" : "#EFE8DC"}`, borderRadius: 8 }}>
+                                <span style={{ color: "var(--text-main)", fontWeight: 500 }}>{p.name}</span>
                                 <span style={{ color: "#64748b" }}>{p.type}</span>
                                 <span style={{ color: "#64748b" }}>{p.txCount} txs</span>
                                 <span style={{ fontSize: 10, fontWeight: 700, color: p.risk === "clean" ? "#2D7A4F" : p.risk === "high" ? "#B8321C" : "#B8861C" }}>{p.risk?.toUpperCase()}</span>
@@ -628,7 +628,7 @@ export default function SolveraLanding() {
 
               {/* Tier 4: Compliance Report */}
               {!unlockedTiers.report ? (
-                <div style={{ position: "relative", overflow: "hidden", minHeight: 240, background: "#FFFFFF", border: "1px solid rgba(255,255,255,0.08)", borderRadius: 16 }}>
+                <div style={{ position: "relative", overflow: "hidden", minHeight: 240, background: "var(--bg-card)", border: "1px solid rgba(255,255,255,0.08)", borderRadius: 16 }}>
                   {/* Layer 1: blurred placeholder bars */}
                   <div style={{ padding: 28, filter: "blur(6px)", opacity: 0.3, pointerEvents: "none", userSelect: "none" }}>
                     {[[60, 16], [90, 10], [75, 10], [85, 10], [50, 10], [80, 10], [65, 10]].map(([w, h], i) => (
@@ -638,7 +638,7 @@ export default function SolveraLanding() {
                   {/* Layer 2: overlay */}
                   <div style={{ position: "absolute", top: 0, left: 0, right: 0, bottom: 0, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", background: "rgba(247,241,232,0.93)", padding: "32px 28px" }}>
                     <span style={{ fontSize: 11, fontWeight: 600, color: "#6B7280", background: "rgba(26,31,46,0.08)", padding: "5px 14px", borderRadius: 20, marginBottom: 14 }}>Locked · $2.00</span>
-                    <h3 style={{ fontSize: 20, fontWeight: 600, color: "#1A1F2E", margin: "0 0 8px", textAlign: "center" }}>Full Investigation Report</h3>
+                    <h3 style={{ fontSize: 20, fontWeight: 600, color: "var(--text-main)", margin: "0 0 8px", textAlign: "center" }}>Full Investigation Report</h3>
                     <p style={{ fontSize: 13, color: "#6B7280", textAlign: "center", maxWidth: 320, lineHeight: 1.5, margin: "0 0 18px" }}>
                       A formal PDF with full pattern breakdown, supporting evidence, and recommended actions. For when you need to document what you found.
                     </p>
@@ -649,7 +649,7 @@ export default function SolveraLanding() {
                   </div>
                 </div>
               ) : (
-                <div style={{ background: "#FFFFFF", border: "1px solid rgba(26,31,46,0.07)", borderRadius: 16, padding: mob ? 20 : 24, textAlign: "center" }}>
+                <div style={{ background: "var(--bg-card)", border: "1px solid var(--border-card)", borderRadius: 16, padding: mob ? 20 : 24, textAlign: "center" }}>
                   <div style={{ fontSize: 11, fontWeight: 600, color: "#2D7A4F", letterSpacing: "0.06em", marginBottom: 12 }}>REPORT GENERATED</div>
                   <p style={{ fontSize: 13, color: "#6B7280", marginBottom: 16 }}>Your full PDF investigation report is ready.</p>
                   <a href={`/api/wallet/${result.address}/report.pdf`} target="_blank" rel="noopener noreferrer" style={{ ...btnP, padding: "12px 28px", fontSize: 14, display: "inline-flex", alignItems: "center", gap: 8, textDecoration: "none" }}>
@@ -795,7 +795,7 @@ export default function SolveraLanding() {
       </section>
 
       {/* FOOTER */}
-      <footer style={{ padding: mob ? "24px 20px" : "32px 40px", background: "#0C1222" }}>
+      <footer style={{ padding: mob ? "24px 20px" : "32px 40px", background: "var(--bg-nav)" }}>
         <div style={{ maxWidth: 1100, margin: "0 auto", display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: 16 }}>
           <img src={LOGO_H} alt="Solvera" style={{ height: 32 }} />
           <div style={{ display: "flex", alignItems: "center", gap: 16 }}>
