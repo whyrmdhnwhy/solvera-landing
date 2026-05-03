@@ -25,8 +25,9 @@ export default async function handler(req, res) {
     res.setHeader("Content-Disposition", `inline; filename="${filename}"`);
     generateComplianceReport(walletData, res);
   } catch (err) {
-    console.error("[pdf]", err.message);
-    return res.status(500).json({ error: "Failed to generate PDF report." });
+    console.error("[pdf] ERROR:", err.message);
+    console.error("[pdf] STACK:", err.stack);
+    return res.status(500).json({ error: "Failed to generate PDF report.", detail: err.message });
   }
 }
 
