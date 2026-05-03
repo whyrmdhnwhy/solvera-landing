@@ -34,7 +34,7 @@ async function main() {
   console.log(`\n🔍 Fetching analytics from: ${baseUrl}\n`);
 
   try {
-    const res = await fetch(url);
+    const res = await fetch(url, { redirect: 'follow' });
     if (!res.ok) {
       const body = await res.json().catch(() => ({}));
       console.error(`❌ Error ${res.status}: ${body.error || res.statusText}`);
